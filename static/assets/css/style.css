@@ -77,6 +77,9 @@ aside{
 	height: 100%;
 	border-radius: 10px;
 }
+.product_photo{
+	height: 200px;
+}
 .kolumna{
 	border-style: groove;
 	border-width: thin;
@@ -110,7 +113,8 @@ aside{
 	position: fixed;
 	right: 1px;
 	top: 100px;
-	width: 200px;
 	margin:0px;
+	width:200px;
+	height: 200px;
 
 }

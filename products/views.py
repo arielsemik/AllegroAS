@@ -26,7 +26,7 @@ def product_detail(request, product_id):
     #product_image = get_object_or_404(ProductImages, product = id)
     #seller = get_object_or_404(Product, id=id)
     namep = get_object_or_404(Product, id = product_id)
-    image = get_object_or_404(ProductImages, product = product_id)
+    images   = ProductImages.objects.filter(product=product_id)
 
 
-    return render(request, 'products/productdetails.html', {'id': product_id, 'productname': namep.name, 'image' = )
+    return render(request, 'products/productdetails.html', {'price': namep.price,'stock': namep.stock, 'available':namep.available ,'id': product_id, 'productname': namep.name,'description': namep.description, 'images': images})

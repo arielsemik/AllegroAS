@@ -3,10 +3,24 @@
 
     {% if productname %}
 
-
         {{ id }}
+
         {{ productname }}
-        {{ '' }}
+
+        {{ description }}
+        {{ price }}zł
+        {{ available }}<br>
+
+
+        {% if images %}
+
+
+            {% for image in images %}
+
+                 <img class="product_photo" src="{{ image.image.url }}"/>
+
+            {% endfor %}
+        {%  endif %}
 
     {% endif %}
 
