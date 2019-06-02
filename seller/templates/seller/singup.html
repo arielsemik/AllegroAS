@@ -1,0 +1,28 @@
+
+<h1>Formularz rejestracyjny sprzedawcy w sklepie AllegroAS</h1>
+
+{% if invalid_form %}
+<div class="alert alert-danger">{{ invalid_form }}</div>
+{% endif %}
+
+<form class="" method="post" action="{% url 'submit' %}">
+  {% csrf_token %}
+
+  <div class="form-group">
+    <label for="exampleInputEmail1">Email</label>
+    <input type="email" class="form-control {% if invalid_form %} {% endif %}" id="singupemail" placeholder="Email" name="email" value="{{ fields.email}}">
+
+  <div class="form-group">
+      <label for="exampleInputPassword1">Hasło</label>
+      <input type="password" class="form-control" id="singuppassword" placeholder="Haslo" name="password" value="{{ fields.password }}">
+  </div>
+
+  <div class="form-group">
+    <label for="exampleInputPassword1">Nazwa firmy</label>
+    <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Nazwa_firmy" name="companyname" value="{{ fields.companyname }}">
+  </div>
+  <button type="submit" class="btn btn-default" value="Zapisz">Zarejestruj się jako sprzedawca</button>
+</form>
+
+
+
