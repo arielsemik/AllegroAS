@@ -30,7 +30,7 @@
         {% for produc in products %}
             <a href="{% url 'product_detail' produc.id %}">
                 <div class="row product">
-                <div class="kolumna col-lg-2 col-md-2 col-sm-2">{{  produc.name }} </div>
+                <div class="kolumna col-lg-2 col-md-2 col-sm-2">{{ produc.name }} </div>
                 <div class="kolumna col-lg-2 col-md-2 col-sm-2">{{ produc.name }} </div>
                 <div class="kolumna col-lg-6 col-md-6 col-sm-6">{{ produc.description }} </div>
                 <div class="kolumna col-lg-2 col-md-2 col-sm-2">{{ produc.price }} </div>

@@ -1,13 +1,23 @@
+
 {% block header %}
 <nav class="row nawigation">
-    <div class="col-md-2"><a href="{% url 'product_list' %}"> Logo</a></div>
-    <div class="col-md-4 search_m"><input class="search_m" type="text" alt="wyszukiwatka"> </div>
-    <div class="col-md-2 "><input class="button_m" type="button" alt="Przycisk"> </div>
+    
 
+    <div class="col-md-2"><a href="{% url 'product_list' %}"> Logo</a></div>
+    <div class="col-md-6 search_m">
+
+        <form method="get" action="{% url 'search_products' 'search_input' %}">
+            <input class="search_m" name='search_input'  type="search" placeholder="Wprowadź nazwę produktu, któego szukasz" value= >
+            <input  class="button_m" type="submit" alt="Przycisk">
+        </form>
+    </div>
+    
+    
     <div class="col-md-2">jeszcze nie wiem co</div>
     <div class="col-md-2">Logowanie</div>
 
-
+            
 </nav>
 {% endblock %}
 
+    

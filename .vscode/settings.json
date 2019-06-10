@@ -1,0 +1,17 @@
+{
+    "python.pythonPath": "C:\\Users\\semik\\AppData\\Local\\Programs\\Python\\Python37-32\\python.exe",
+    "python.testing.pyTestArgs": [
+        "AllegroAS"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.nosetestsEnabled": false,
+    "python.testing.pyTestEnabled": false,
+    "python.dataScience.sendSelectionToInteractiveWindow": true,
+    "python.terminal.executeInFileDir": true,
+    "python.testing.promptToConfigure": false,
+    "djangointellisense.debugMessages": true,
+    "djangointellisense.settingsModule": "AllegroAS.settings",
+    "pip-updater.AutoUpdate": true,
+    "python.autoComplete.addBrackets": true,
+    "python.linting.mypyPath": "manage.py"
+}

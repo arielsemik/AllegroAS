@@ -1,0 +1,3 @@
+C:\Users\semik\Dysk Google\Programowanie\Kurs Python\AllegroAS\obj\Debug\AllegroAS.pyproj.CoreCompileInputs.cache
+C:\Users\semik\Dysk Google\Programowanie\Kurs Python\AllegroAS\bin\Microsoft.PythonTools.WebRole.dll
+C:\Users\semik\Dysk Google\Programowanie\Kurs Python\AllegroAS\bin\wfastcgi.py

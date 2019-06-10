@@ -1,34 +1,23 @@
-﻿{% load static %}
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
+{% load static %}
+
 <html lang="pl">
 
 
 <head>
      <meta charset="UTF-8">
-     <title>Strona główna AllegroAS</title>
+     <title>AllegroAS</title>
      <link rel="stylesheet" type="text/css" href="{% static 'assets/bootstrap/css/bootstrap.min.css' %}" >
-
+    
      <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}">
-{#     <script src="{% static 'assets/js/jquery-3.4.1.min.js' %}"></script>#}
+     <script src="{% static 'assets/js/jquery-3.4.1.min.js' %}"></script>
      <script src="{% static 'assets/bootstrap/js/bootstrap.min.js' %}"></script>
      <script src="{% static 'assets/js/script.js' %}"></script>
      <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap" type="text/javascript"></script>
 </head>
 <body>
     <header>
-        {% block header %} {% endblock %}
-        {% block header %} {% endblock %}
-        <nav class="row nawigation">
-            <div class="col-md-2"><a href="{% url 'product_list' %}"> Logo</a></div>
-            <div class="col-md-4 search_m"><input class="search_m" type="text" alt="wyszukiwatka"> </div>
-            <div class="col-md-2 "><input class="button_m" type="button" alt="Przycisk"> </div>
-
-            <div class="col-md-2">jeszcze nie wiem co</div>
-            <div class="col-md-2">Logowanie</div>
-
-
-        </nav>
-
+        {% include "header.html" %}
     </header>
 
 
@@ -36,6 +25,7 @@
             {% block kategorie %} {% endblock %}
     		{% block produkty %} {% endblock %}
             {% block productdetails %} {% endblock %}
+                                                                       
 </main>
 
 <aside class=" seller_map">
@@ -47,7 +37,7 @@
 <footer class=" row footer_m">
 
     <div class="col-md-12">Tu będzie stopka</div>
-
+    
 </footer>
 
 

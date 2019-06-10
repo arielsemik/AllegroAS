@@ -16,25 +16,33 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Seller',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('company_name', models.CharField(max_length=200, verbose_name='Nazwa firmy')),
-                ('description', models.CharField(blank=True, max_length=1000, null=True, verbose_name='Opis firmy')),
-                ('email', models.EmailField(blank=True, max_length=254, null=True, verbose_name='Email')),
+                ('id', models.AutoField(auto_created=True,
+                                        primary_key=True, serialize=False, verbose_name='ID')),
+                ('company_name', models.CharField(
+                    max_length=200, verbose_name='Nazwa firmy')),
+                ('description', models.CharField(blank=True,
+                                                 max_length=1000, null=True, verbose_name='Opis firmy')),
+                ('email', models.EmailField(blank=True,
+                                            max_length=254, null=True, verbose_name='Email')),
                 ('password', models.CharField(max_length=40, verbose_name='Hasło')),
             ],
         ),
         migrations.CreateModel(
             name='Address',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('address_type', multiselectfield.db.fields.MultiSelectField(choices=[(1, 'Fakturowania'), (2, 'Dostawy'), (3, 'Siedziba')], max_length=3)),
+                ('id', models.AutoField(auto_created=True,
+                                        primary_key=True, serialize=False, verbose_name='ID')),
+                ('address_type', multiselectfield.db.fields.MultiSelectField(choices=[
+                 (1, 'Fakturowania'), (2, 'Dostawy'), (3, 'Siedziba')], max_length=3)),
                 ('street', models.CharField(max_length=100)),
                 ('number', models.PositiveSmallIntegerField(blank=True)),
                 ('number_room', models.CharField(blank=True, max_length=10)),
-                ('postal_code', models.PositiveSmallIntegerField(blank=True, null=True)),
+                ('postal_code', models.PositiveSmallIntegerField(
+                    blank=True, null=True)),
                 ('city', models.CharField(max_length=40)),
                 ('tax_number', models.IntegerField(unique=True)),
-                ('company', models.ForeignKey(default=None, on_delete=django.db.models.deletion.CASCADE, to='seller.Seller')),
+                ('company', models.ForeignKey(
+                    default=None, on_delete=django.db.models.deletion.CASCADE, to='seller.Seller')),
             ],
         ),
     ]
