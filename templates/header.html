@@ -3,12 +3,13 @@
 <nav class="row nawigation">
     
 
-    <div class="col-md-2"><a href="{% url 'product_list' %}"> Logo</a></div>
+    <div class="col-md-2"><a href="{% url 'product_list' %}">Logo</a></div>
     <div class="col-md-6 search_m">
 
-        <form method="get" action="{% url 'search_products' 'search_input' %}">
-            <input class="search_m" name='search_input'  type="search" placeholder="Wprowadź nazwę produktu, któego szukasz" value= >
-            <input  class="button_m" type="submit" alt="Przycisk">
+        <form method="GET" action="{% url 'search_products' 'search_input' %}">
+            <input class="search_m" id="category_id" value='{{category_id}}' name="category_id" type="search" hidden>
+            <input class="search_m" id="search_input" value='{{search_input}}' name='search_input'  type="search" placeholder='Wprowadź nazwę produktu, którego szukasz'/>
+            <input  class="button_m" type="submit" alt="Przycisk" value="searach">
         </form>
     </div>
     

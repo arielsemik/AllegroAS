@@ -8,17 +8,29 @@ def index(request):
     # category_list = Category.objects.all()
     return render(request, 'products/index.html')
 
-def category_list(request, category_id = None, search_input = None):
-
-    if search_input:
-        products = Product.objects.filter(available = True, name__contains= search_input)
-    else:
-        products = Product.objects.filter(available = True, product_category =category_id)
-
-
-
+def category_list(request, category_id = None, product_search=None):
     category_list_in = Category.objects.all()
-    return render(request, 'products/productlist.html', {"catlist": category_list_in, "product_search": search_input, "products": products})
+    products = Product.objects.filter(available = True, product_category =category_id)
+    if product_search:
+
+        product_search = request.GET['product_search']
+        products = Product.objects.filter(available=True, name=product_search, product_category=category_id)
+
+        return render(request, 'products/productlist.html',{"product_search":product_search, "catlist": category_list_in, "products": products, 'category_id':category_id})
+    else:
+        return render(request, 'products/productlist.html', {"catlist": category_list_in, "products": products, 'category_id': category_id})
+def search_products(request, category_id = None, search_input = None):
+    category_list_in = Category.objects.all()
+    category_id = request.GET['category_id']
+    search_prod = request.GET['search_input'].lower().strip()
+    if category_id:
+        products = Product.objects.filter(available=True, product_category=category_id, name__contains=search_prod)
+    else:
+        products = Product.objects.filter(available=True, name__contains=search_prod)
+
+    return render(request, 'products/productlist.html', {"catlist": category_list_in, 'category_id':category_id, "product_search": search_prod, "products": products})
+
+
 
 def product_list(request, product_id = None):
     category_list_in = Category.objects.all()

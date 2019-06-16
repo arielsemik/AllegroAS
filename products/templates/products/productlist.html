@@ -4,13 +4,10 @@
 	<div class="categories col-lg-2 col-md-2">
 		<div class="categories_wew">
 {% if catlist %}
-
+    {{ product_search }}
     <ul>
     {% for one_cat in catlist %}
-
        <li> <a methods="GET" href="{% url 'category_list' one_cat.id %}" >{{ one_cat.cat_name }}</a> </li>
-
-
     {% endfor %}
     </ul>
 
