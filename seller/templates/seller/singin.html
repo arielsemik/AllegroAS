@@ -1,11 +1,12 @@
-
+{% extends "base.html" %}
+{% block singin %}
 <h1>Logowanie</h1>
 
 {% if invalid_form %}
 <div class="alert alert-danger">{{ invalid_form }}</div>
 {% endif %}
 
-<form class="" method="post" action="{% url 'sing_in_function' %}">
+<form class="" method="post" action="{% url 'logged' %}">
   {% csrf_token %}
 
   <div class="form-group">
@@ -18,6 +19,8 @@
   </div>
   <button type="submit" class="btn btn-default" value="Zapisz">Zarejestruj się jako sprzedawca</button>
 </form>
+
+{% endblock %}
 
 
 

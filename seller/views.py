@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from . models import *
 from django.urls import *
 from django.core.mail import send_mail
+from products import models
 
 def index(request):
     pass
@@ -32,12 +33,12 @@ def submit(request):
 def sing_in(request):
     return render(request, 'seller/singin.html')
 
-def sing_in_function(request):
+def logged(request):
     # Wysyla email i hasło, sprawdza czy jest w bazie
     error = False
     error_msg =''
     email = request.POST['email']
-    user = Seller.objects.filter(email=email) #uzyc getobjector404
+    user = Seller.objects.filter(email=email)[0] #uzyc getobjector404
 
     haslo = request.POST['password']
 
@@ -53,7 +54,8 @@ def sing_in_function(request):
 
     if error:
         return render(request, 'seller/singin.html', {'invalid_form': error_msg, 'fields': request.POST})
-
+    else:
+        return render(request, 'seller/logged.html', {'seller': user, 'email': email})
 
 
 
