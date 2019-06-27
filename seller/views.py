@@ -4,6 +4,8 @@ from . models import *
 from django.urls import *
 from django.core.mail import send_mail
 from products import models
+from products.models import Product, Category, ProductImages
+
 
 def index(request):
     pass
@@ -21,19 +23,20 @@ def submit(request):
 
     if error:
         return render(request, 'seller/singup.html', {'invalid_form': error_msg, 'fields': request.POST})
-
-    massage = Seller(
-        company_name =request.POST['companyname'],
-        email = request.POST['email'],
-        password =request.POST['password']
-    )
-
-    return render(request, 'seller/submit.html') # lub użyć redirect aby przeniosłop na inny adres
+    else:
+        massage = Seller(
+            company_name =request.POST['companyname'],
+            email = request.POST['email'],
+            password =request.POST['password']
+        )
+        massage.save()
+        company_name = request.POST['companyname']
+        return render(request, 'seller/submit.html', {'company': company_name}) # lub użyć redirect aby przeniosłop na inny adres
 
 def sing_in(request):
     return render(request, 'seller/singin.html')
 
-def logged(request):
+def seller_menu(request):
     # Wysyla email i hasło, sprawdza czy jest w bazie
     error = False
     error_msg =''
@@ -55,7 +58,15 @@ def logged(request):
     if error:
         return render(request, 'seller/singin.html', {'invalid_form': error_msg, 'fields': request.POST})
     else:
-        return render(request, 'seller/logged.html', {'seller': user, 'email': email})
+        return render(request, 'seller/seller_menu.html', {'seller': user, 'email': email})
+
+
+def seller_products(request):
+    email = request.POST['email']
+    user = Seller.objects.filter(email=email)[0] #uzyc getobjector404
+
+
+    return render(request, 'seller/seller_products.html',{"products": products})
 
 
 

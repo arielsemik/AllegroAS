@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block seller_products %}
+
+            <div class=" product_list col-lg-10 col-md-10">
+		<div class="product_list_wew">
+     {% if products %}
+        {% for produc in products %}
+            <a href="{% url 'product_detail' produc.id %}">
+                <div class="row product">
+                <div class="kolumna col-lg-2 col-md-2 col-sm-2">{{ produc.name }} </div>
+                <div class="kolumna col-lg-2 col-md-2 col-sm-2">{{ produc.name }} </div>
+                <div class="kolumna col-lg-6 col-md-6 col-sm-6">{{ produc.description }} </div>
+                <div class="kolumna col-lg-2 col-md-2 col-sm-2">{{ produc.price }} </div>
+
+                </div>
+            </a>
+        {% endfor %}
+
+     {% endif %}
+
+		</div>
+    </div>
+
+{% endblock %}
+
+
+
