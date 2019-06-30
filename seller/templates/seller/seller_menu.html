@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% block seller_menu %}
-<h1>Witaj ukochany sprzedawco  {{ seller }} </h1>
+<h1>Witaj ukochany sprzedawco  {{ seller }} {{ sellerid }} </h1>
 
 <h2>Menu klienta</h2>
-<a href="{% url 'seller_products' %}">Lista produktow</a>
+<a href="{% url 'seller_products' %}"  >Lista produktow</a>
 <button href="">Dodaj produkt</button>
 <button href="">Moje zamowienia</button>
 <button href="">Moje dane</button>

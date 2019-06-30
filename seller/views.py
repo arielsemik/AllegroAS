@@ -5,10 +5,9 @@ from django.urls import *
 from django.core.mail import send_mail
 from products import models
 from products.models import Product, Category, ProductImages
+from django.shortcuts import get_object_or_404
 
 
-def index(request):
-    pass
 
 def sing_up(request):
      return render(request, 'seller/singup.html')
@@ -40,17 +39,20 @@ def seller_menu(request):
     # Wysyla email i hasło, sprawdza czy jest w bazie
     error = False
     error_msg =''
+    global email
     email = request.POST['email']
-    user = Seller.objects.filter(email=email)[0] #uzyc getobjector404
+    global users
+    users = Seller.objects.filter(email=email)[0] #uzyc getobjector404
+
 
     haslo = request.POST['password']
 
 
-    if (user.email)[0] == None:
+    if (users.email)[0] == None:
         error = True
         error_msg = 'Brak Ciebie w bazie danych'
 
-    elif user.password != haslo:
+    elif users.password != haslo:
         error = True
         error_msg = 'Blędne hasło'
 
@@ -58,15 +60,31 @@ def seller_menu(request):
     if error:
         return render(request, 'seller/singin.html', {'invalid_form': error_msg, 'fields': request.POST})
     else:
-        return render(request, 'seller/seller_menu.html', {'seller': user, 'email': email})
+        global userid
+        userid = users.id
 
+        return render(request, 'seller/seller_menu.html', {'sellerid': userid, 'seller': users})
+# def seller_menu2(request):
+#
+#     email = request.POST['email']
+#     users = Seller.objects.filter(email=email)[0] #uzyc getobjector404
+#
+#
+#     haslo = request.POST['password']
+#
+#
+#
+#     global userid
+#     userid = users.id
+#
+#     return render(request, 'seller/seller_menu.html', {'sellerid': userid, 'seller': users})
 
 def seller_products(request):
-    email = request.POST['email']
-    user = Seller.objects.filter(email=email)[0] #uzyc getobjector404
 
+    # products = get_object_or_404(Product, pk=id)
+    products = Product.objects.filter(seller_id=userid)
 
-    return render(request, 'seller/seller_products.html',{"products": products})
+    return render(request, 'seller/seller_products.html',{"products": products, 'seller': users, 'email':email})
 
 
 
