@@ -6,6 +6,9 @@ from django.core.mail import send_mail
 from products import models
 from products.models import Product, Category, ProductImages
 from django.shortcuts import get_object_or_404
+from django_globals import globals
+
+
 
 
 
@@ -35,16 +38,18 @@ def submit(request):
 def sing_in(request):
     return render(request, 'seller/singin.html')
 
-def seller_menu(request):
+def login(request):
     # Wysyla email i hasło, sprawdza czy jest w bazie
     error = False
     error_msg =''
-    global email
     email = request.POST['email']
+    request.session['email'] = email
     global users
     users = Seller.objects.filter(email=email)[0] #uzyc getobjector404
+    request.session['usersession'] = users
+    us = request.session.get('usersession')
 
-
+    # usersession = request.session.get['usersession']
     haslo = request.POST['password']
 
 
@@ -62,29 +67,24 @@ def seller_menu(request):
     else:
         global userid
         userid = users.id
+        request.session['useridsession'] = userid
 
-        return render(request, 'seller/seller_menu.html', {'sellerid': userid, 'seller': users})
-# def seller_menu2(request):
-#
-#     email = request.POST['email']
-#     users = Seller.objects.filter(email=email)[0] #uzyc getobjector404
-#
-#
-#     haslo = request.POST['password']
-#
-#
-#
-#     global userid
-#     userid = users.id
-#
-#     return render(request, 'seller/seller_menu.html', {'sellerid': userid, 'seller': users})
+        return render(request, 'seller/seller_menu.html', {'sellerid': userid, 'seller': users, 'us':us})
+
+def selle_menu(request):
+    us = request.session.get('usersession')
+    email = request.session.get('email')
+
+    return render(request, 'seller/seller_menu.html', {'us':us})
 
 def seller_products(request):
+    userid = request.session.get('useridsession')
 
+    us = request.session.get('usersession')
     # products = get_object_or_404(Product, pk=id)
     products = Product.objects.filter(seller_id=userid)
 
-    return render(request, 'seller/seller_products.html',{"products": products, 'seller': users, 'email':email})
+    return render(request, 'seller/seller_products.html',{"products": products, 'us': us})
 
 
 

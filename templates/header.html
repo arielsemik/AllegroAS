@@ -17,8 +17,8 @@
     <div class="col-md-2">jeszcze nie wiem co</div>
 
     <div class="col-md-2">
-       {% if seller is not null %}
-            <a href="{% url 'seller_menu' %}" methods="POST"  name="{{ email }}">Zalogowano jako {{ seller }} </a>
+   {% if us is not null %}
+            <a href="{% url 'seller_menu' %}" name="us" methods="POST">Zalogowano jako {{ us }}  </a>
        {% else %}
             {{ userid }}
             <a href="{% url 'sing_in' %}">Logowanie</a>
