@@ -52,7 +52,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-]
+    'django_session_timeout.middleware.SessionTimeoutMiddleware',
+    ]
 
 ROOT_URLCONF = 'AllegroAS.urls'
 
@@ -131,3 +132,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
 
 SESSION_SERIALIZER = 'django.contrib.sessions.serializers.PickleSerializer'
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True

@@ -7,6 +7,7 @@ from products import models
 from products.models import Product, Category, ProductImages
 from django.shortcuts import get_object_or_404
 from django_globals import globals
+from django.shortcuts import redirect
 
 
 
@@ -24,6 +25,7 @@ def submit(request):
         error_msg += 'Nie wypelniłeś pola email \n\n\n'
 
     if error:
+
         return render(request, 'seller/singup.html', {'invalid_form': error_msg, 'fields': request.POST})
     else:
         massage = Seller(
@@ -32,8 +34,10 @@ def submit(request):
             password =request.POST['password']
         )
         massage.save()
+        request.session['usersession'] = request.POST['companyname']
+        us = request.session.get('usersession')
         company_name = request.POST['companyname']
-        return render(request, 'seller/submit.html', {'company': company_name}) # lub użyć redirect aby przeniosłop na inny adres
+        return render(request, 'seller/seller_menu.html', {'company': company_name, 'us':us}) # lub użyć redirect aby przeniosłop na inny adres
 
 def sing_in(request):
     return render(request, 'seller/singin.html')
@@ -44,12 +48,9 @@ def login(request):
     error_msg =''
     email = request.POST['email']
     request.session['email'] = email
-    global users
     users = Seller.objects.filter(email=email)[0] #uzyc getobjector404
-    request.session['usersession'] = users
-    us = request.session.get('usersession')
 
-    # usersession = request.session.get['usersession']
+
     haslo = request.POST['password']
 
 
@@ -65,7 +66,8 @@ def login(request):
     if error:
         return render(request, 'seller/singin.html', {'invalid_form': error_msg, 'fields': request.POST})
     else:
-        global userid
+        request.session['usersession'] = users.company_name
+        us = request.session.get('usersession')
         userid = users.id
         request.session['useridsession'] = userid
 
@@ -85,6 +87,11 @@ def seller_products(request):
     products = Product.objects.filter(seller_id=userid)
 
     return render(request, 'seller/seller_products.html',{"products": products, 'us': us})
+
+def logouta(request):
+    request.session.clear()
+    return render(request, 'base.html')
+
 
 
 

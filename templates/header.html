@@ -14,13 +14,16 @@
     </div>
     
     
-    <div class="col-md-2">jeszcze nie wiem co</div>
+    <div class="col-md-1">jeszcze nie wiem co</div>
 
-    <div class="col-md-2">
+    <div class="col-md-3">
    {% if us is not null %}
             <a href="{% url 'seller_menu' %}" name="us" methods="POST">Zalogowano jako {{ us }}  </a>
+            ||
+            <a href="{% url 'logouta' %}" name="logout" methods="POST">Wyloguj  </a>
+
+
        {% else %}
-            {{ userid }}
             <a href="{% url 'sing_in' %}">Logowanie</a>
             <a href="{% url 'sing_up' %}">Rejestracja</a>
        {% endif %}
