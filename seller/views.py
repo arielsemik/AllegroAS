@@ -19,13 +19,19 @@ def sing_up(request):
 def submit(request):
     error = False
     error_msg =''
-
+    email = request.POST['email']
     if len(request.POST['email']) == 0:
         error = True
         error_msg += 'Nie wypelniłeś pola email \n\n\n'
+    elif len(request.POST['password']) == 0:
+        error = True
+        error_msg += 'Nie wypelniłeś pola haso \n\n\n'
+    elif len(Seller.objects.filter(email=email)) != 0:
+        error = True
+        error_msg += 'Taki email juz istnieje w bazie danych \n\n\n'
+
 
     if error:
-
         return render(request, 'seller/singup.html', {'invalid_form': error_msg, 'fields': request.POST})
     else:
         massage = Seller(
@@ -73,6 +79,10 @@ def login(request):
 
         return render(request, 'seller/seller_menu.html', {'sellerid': userid, 'seller': users, 'us':us})
 
+def logouta(request):
+    request.session.clear()
+    return render(request, 'base.html')
+
 def selle_menu(request):
     us = request.session.get('usersession')
     email = request.session.get('email')
@@ -88,11 +98,13 @@ def seller_products(request):
 
     return render(request, 'seller/seller_products.html',{"products": products, 'us': us})
 
-def logouta(request):
-    request.session.clear()
-    return render(request, 'base.html')
+def add_product(request):
+    userid = request.session.get('useridsession')
 
+    us = request.session.get('usersession')
+    category_list_in = Category.objects.all()
 
+    return render(request, 'seller/naw_product.html', {"catlist":category_list_in,'us': us})
 
 
 

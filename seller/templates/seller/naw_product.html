@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block new_product %}
+<h1> Dodajesz produkt</h1>
+
+<form name="new_product" method="get" action="{% url 'add_product' %}">
+<label> Nazwa produktu</label>
+<input name="product_name" type="text"><br>
+
+<label>Opis produktu</label>
+<input name="descriptio" type="text"><br>
+
+<label> Kategoria produktu</label>
+<select name="category" >
+        <option selected></option>
+    {% for category in catlist %}
+    {% if category.cat_name_father != None %}
+        <option  value="{{ category.cat_name }}">   {{ category.cat_name_father }} ||  {{ category.cat_name }}</option>
+    {% endif %}
+    {% endfor %}
+</select>
+<br>
+
+
+<label>Cena</label>
+<input name="price" type="number" step="0.01"><br>
+
+<label> Dostepna ilosc</label>
+<input name="quantity" type="number"><br>
+
+<label> Czy produkt dostpny</label>
+<input name="isavailable" type="checkbox"><br>
+
+<br>
+
+<label>Dodaj obraz</label>
+
+<input type="file"><br>
+
+
+<button type="submit"> Dodaj produkt</button>
+<button type="reset">Porzuc</button>
+
+
+
+
+</form>
+
+
+{% endblock %}
